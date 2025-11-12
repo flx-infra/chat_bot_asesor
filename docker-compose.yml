@@ -52,6 +52,10 @@ services:
       - CUSTOM_DISPATCHER_URL=${CUSTOM_DISPATCHER_URL:-http://localhost:8082}
       - CUSTOM_DISPATCHER_API_KEY=${CUSTOM_DISPATCHER_API_KEY:-LO_QUE_QUIERAS}
 
+      - NODE_ENV=${NODE_ENV}
+      - LOG_LEVEL=${LOG_LEVEL}
+      - LOG_DIR=${LOG_DIR}
+
     logging:
       driver: loki
       options:
