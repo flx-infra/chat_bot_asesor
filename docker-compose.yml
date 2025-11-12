@@ -1,0 +1,74 @@
+version: "3.8"
+services:
+  chatbot-asesor:
+    build:
+      context: .
+      target: runtime
+    image: fabreguesm/chatbot-asesor:1.0.1
+    ports:
+      - "${PORT:-4800}:${PORT:-4800}"
+    environment:
+      # Timeout e intervalo
+      - TIMEOUT_INACTIVO=${TIMEOUT_INACTIVO:-120}
+      - INTERVALO_TIMER=${INTERVALO_TIMER:-1}
+
+      # MySQL Configuration
+      - HOST=${HOST}
+      - USER=${USER}
+      - PASSWORD=${PASSWORD}
+      - DATABASE=${DATABASE}
+      - MYSQL_DB_NAME=${MYSQL_DB_NAME:-suitecrm}
+      - PORTS_MYSQL=${PORTS_MYSQL:-5002}
+
+      # Meta/WhatsApp Configuration
+      - META_NUMBER_ID=${META_NUMBER_ID}
+      - JWT_TOKEN=${JWT_TOKEN}
+      - META_VERIFY_TOKEN=${META_VERIFY_TOKEN}
+
+      # Horarios
+      - HORA_INICIO=${HORA_INICIO:-0}
+      - HORA_CIERRE=${HORA_CIERRE:-24}
+
+      # Server Configuration
+      - PORT=${PORT:-4800}
+
+      # API Configuration
+      - URL_API=${URL_API:-http://localhost:5003}
+      - USER_API=${USER_API:-ADMIN}
+      - PASS_API=${PASS_API:-ADMIN}
+      - DEVICE_INFO=${DEVICE_INFO:-{"model":"0","platform":"0","uuid":"4953457348957348975","version":"0","manufacturer":"0"}}
+
+      # Email Configuration
+      - EMAIL_ASESOR=${EMAIL_ASESOR}
+      - SMTP=${SMTP:-smtp.gmail.com}
+      - PORT_EMAIL=${PORT_EMAIL:-465}
+      - PORT_SECURE=${PORT_SECURE:-true}
+      - AUTH_USER=${AUTH_USER}
+      - AUTH_PASS=${AUTH_PASS}
+      - EMAIL_ENVIO=${EMAIL_ENVIO}
+
+      # Provider Configuration
+      - USE_CUSTOM_PROVIDER=${USE_CUSTOM_PROVIDER:-true}
+      - CUSTOM_DISPATCHER_URL=${CUSTOM_DISPATCHER_URL:-http://localhost:8082}
+      - CUSTOM_DISPATCHER_API_KEY=${CUSTOM_DISPATCHER_API_KEY:-LO_QUE_QUIERAS}
+
+    deploy:
+      placement:
+        constraints:
+          - ${NODE}
+
+    volumes:
+      - ./logs:/app/logs
+
+    networks:
+      - traefik
+
+logging:
+      driver: loki
+      options:
+       loki-url: ${LOKI_URL}      
+
+networks:
+  traefik:
+    external:
+      name: traefik
