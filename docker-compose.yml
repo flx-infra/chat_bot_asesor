@@ -56,10 +56,10 @@ services:
       - LOG_LEVEL=${LOG_LEVEL}
       - LOG_DIR=${LOG_DIR}
 
-    logging:
-      driver: loki
-      options:
-        loki-url: ${LOKI_URL}
+  #  logging:
+  #    driver: loki
+  #    options:
+  #      loki-url: ${LOKI_URL}
 
     deploy:
       placement:
