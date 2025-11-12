@@ -4,7 +4,7 @@ services:
     build:
       context: .
       target: runtime
-    image: fabreguesm/chatbot-asesor:1.0.0
+    image: fabreguesm/chatbot-asesor:1.0.1
     ports:
       - "${PORT:-4800}:${PORT:-4800}"
     environment:
@@ -52,6 +52,11 @@ services:
       - CUSTOM_DISPATCHER_URL=${CUSTOM_DISPATCHER_URL:-http://localhost:8082}
       - CUSTOM_DISPATCHER_API_KEY=${CUSTOM_DISPATCHER_API_KEY:-LO_QUE_QUIERAS}
 
+    logging:
+      driver: loki
+      options:
+        loki-url: ${LOKI_URL}
+
     deploy:
       placement:
         constraints:
@@ -62,11 +67,6 @@ services:
 
     networks:
       - traefik
-
-logging:
-      driver: loki
-      options:
-       loki-url: ${LOKI_URL}      
 
 networks:
   traefik:
