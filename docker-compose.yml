@@ -4,7 +4,7 @@ services:
     build:
       context: .
       target: runtime
-    image: fabreguesm/chatbot-asesor:1.0.0
+    image: fabreguesm/chatbot-asesor:1.0.1
     ports:
       - "${PORT:-4800}:${PORT:-4800}"
     environment:
@@ -63,10 +63,14 @@ services:
           - ${NODE}
 
     volumes:
-      - ./logs:/app/logs
+      - chatbot-logs:/app/logs
 
     networks:
       - traefik
+
+volumes:
+  chatbot-logs:
+    driver: local
 
 networks:
   traefik:
