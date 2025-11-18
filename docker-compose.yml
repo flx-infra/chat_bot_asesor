@@ -59,7 +59,7 @@ services:
 
       # Provider Configuration
       - USE_CUSTOM_PROVIDER=${USE_CUSTOM_PROVIDER:-true}
-      - CUSTOM_DISPATCHER_URL=${CUSTOM_DISPATCHER_URL:-http://10.250.0.68:8082}
+      - CUSTOM_DISPATCHER_URL=${CUSTOM_DISPATCHER_URL:-http://localhost:8082}
       - CUSTOM_DISPATCHER_API_KEY=${CUSTOM_DISPATCHER_API_KEY:-LO_QUE_QUIERAS}
 
       # Logging Configuration
@@ -68,21 +68,24 @@ services:
       - LOG_DIR=${LOG_DIR:-/app/logs}
 
       # Node.js Configuration
-      - NODE_OPTIONS=--max-old-space-size=384
+      - NODE_OPTIONS=--max-old-space-size=1024
 
     deploy:
       placement:
         constraints:
           - ${NODE}
-      restart_policy:
-        condition: on-failure
-        max_attempts: 3
-      resources:
-        limits:
-          memory: 4096M      # Límite máximo - previene OOM kill del host
-        reservations:
-          memory: 2048M      # Memoria reservada garantizada
+      # RESTART POLICY DESHABILITADA - Sin health check, los reinicios automáticos
+      # pueden ocultar problemas reales. Mejor que falle rápido y visible.
+      # restart_policy:
+      #   condition: on-failure
+      #   max_attempts: 3
+      #$resources:
+       # limits:
+       #   memory: 1536M      # Límite máximo - previene OOM kill del host (aumentado para evitar OOM)
+       # reservations:
+       #   memory: 768M      # Memoria reservada garantizada (aumentado)
 
+     #ogging con Loki - DESHABILITADO TEMPORALMENTE PARA DIAGNÓSTICO
     logging:
       driver: loki
       options:
