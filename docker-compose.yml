@@ -4,7 +4,7 @@ services:
     build:
       context: .
       target: runtime
-    image: fabreguesm/chatbot-asesor:1.0.7
+    image: fabreguesm/chatbot-asesor:1.0.8
     ports:
       - "${PORT:-4800}:${PORT:-4800}"
     environment:
