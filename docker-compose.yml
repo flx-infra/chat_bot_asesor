@@ -4,17 +4,18 @@ services:
     build:
       context: .
       target: runtime
-    image: fabreguesm/chatbot-asesor:1.0.13-debug
+    image: fabreguesm/chatbot-asesor:1.0.14-debug
     ports:
       - "${PORT:-4800}:4800"
 
     # Healthcheck - verificar que el servidor HTTP responde
-    healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:4800/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 90s
+    # DESHABILITADO TEMPORALMENTE PARA DIAGNÓSTICO
+    #healthcheck:
+    #  test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:4800/health"]
+    #  interval: 30s
+    #  timeout: 10s
+    #  retries: 3
+    #  start_period: 90s
 
     environment:
       # Timeout e intervalo
@@ -26,7 +27,7 @@ services:
       - USER=${USER}
       - PASSWORD=${PASSWORD}
       - DATABASE=${DATABASE}
-      - MYSQL_DB_NAME=${MYSQL_DB_NAME:-omnicanalidad}
+      - MYSQL_DB_NAME=${MYSQL_DB_NAME:-suitecrm}
       - PORTS_MYSQL=${PORTS_MYSQL:-5002}
 
       # Meta/WhatsApp Configuration
@@ -73,14 +74,14 @@ services:
       placement:
         constraints:
           - ${NODE}
-      #restart_policy:
-        #condition: on-failure
-      #  #max_attempts: 3
-      #resources:
-        #limits:
-          #memory: 512M      # Límite máximo - previene OOM kill del host
-        #reservations:
-          #memory: 256M      # Memoria reservada garantizada
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+      resources:
+        limits:
+          memory: 512M      # Límite máximo - previene OOM kill del host
+        reservations:
+          memory: 256M      # Memoria reservada garantizada
 
     logging:
       driver: loki
