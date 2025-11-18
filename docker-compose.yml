@@ -6,7 +6,7 @@ services:
       target: runtime
     image: fabreguesm/chatbot-asesor:1.0.8
     ports:
-      - "${PORT:-4800}:${PORT:-4800}"
+      - "${PORT:-4800}:4800"
     environment:
       # Timeout e intervalo
       - TIMEOUT_INACTIVO=${TIMEOUT_INACTIVO:-120}
@@ -36,7 +36,7 @@ services:
       - URL_API=${URL_API}
       - USER_API=${USER_API}
       - PASS_API=${PASS_API}
-      - DEVICE_INFO='${DEVICE_INFO:-{"model":"0","platform":"0","uuid":"4953457348957348975","version":"0","manufacturer":"0"}}'
+      - DEVICE_INFO=${DEVICE_INFO:-{"model":"0","platform":"0","uuid":"4953457348957348975","version":"0","manufacturer":"0"}}
 
       # Email Configuration
       - EMAIL_ASESOR=${EMAIL_ASESOR}
@@ -49,7 +49,7 @@ services:
 
       # Provider Configuration
       - USE_CUSTOM_PROVIDER=${USE_CUSTOM_PROVIDER:-true}
-      - CUSTOM_DISPATCHER_URL=${CUSTOM_DISPATCHER_URL:-http://localhost:8082}
+      - CUSTOM_DISPATCHER_URL=${CUSTOM_DISPATCHER_URL:-http://10.250.0.68t:8082}
       - CUSTOM_DISPATCHER_API_KEY=${CUSTOM_DISPATCHER_API_KEY:-LO_QUE_QUIERAS}
 
       # Logging Configuration
