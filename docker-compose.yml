@@ -51,7 +51,7 @@ services:
       - EMAIL_ASESOR=${EMAIL_ASESOR}
       - SMTP=${SMTP:-smtp.gmail.com}
       - PORT_EMAIL=${PORT_EMAIL:-465}
-      - PORT_SECURE="${PORT_SECURE:-true}"
+      - PORT_SECURE=${PORT_SECURE:-true}
       - AUTH_USER=${AUTH_USER}
       - AUTH_PASS=${AUTH_PASS}
       - EMAIL_ENVIO=${EMAIL_ENVIO}
