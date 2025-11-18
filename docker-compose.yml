@@ -79,9 +79,9 @@ services:
         max_attempts: 3
       resources:
         limits:
-          memory: 512M      # Límite máximo - previene OOM kill del host
+          memory: 2048M      # Límite máximo - previene OOM kill del host
         reservations:
-          memory: 256M      # Memoria reservada garantizada
+          memory: 1024M      # Memoria reservada garantizada
 
     logging:
       driver: loki
