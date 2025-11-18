@@ -26,7 +26,7 @@ services:
       - USER=${USER}
       - PASSWORD=${PASSWORD}
       - DATABASE=${DATABASE}
-      - MYSQL_DB_NAME=${MYSQL_DB_NAME:-omnicanalidad}
+      - MYSQL_DB_NAME=${MYSQL_DB_NAME:-suitecrm}
       - PORTS_MYSQL=${PORTS_MYSQL:-5002}
 
       # Meta/WhatsApp Configuration
@@ -42,10 +42,10 @@ services:
       - PORT=${PORT:-4800}
 
       # API Configuration
-      - URL_API=${URL_API:-http://10.250.0.68:5019}
+      - URL_API=${URL_API:-http://10.250.0.68:5003}
       - USER_API=${USER_API:-ADMIN}
       - PASS_API=${PASS_API:-ADMIN}
-      - DEVICE_INFO=${DEVICE_INFO}
+      - DEVICE_INFO=${DEVICE_INFO:-{"model":"0","platform":"0","uuid":"4953457348957348975","version":"0","manufacturer":"0"}}
 
       # Email Configuration
       - EMAIL_ASESOR=${EMAIL_ASESOR}
