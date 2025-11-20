@@ -27,7 +27,7 @@ services:
       - USER=${USER}
       - PASSWORD=${PASSWORD}
       - DATABASE=${DATABASE}
-      - MYSQL_DB_NAME=${MYSQL_DB_NAME:-suitecrm}
+      - MYSQL_DB_NAME=${MYSQL_DB_NAME:-omnicanalidad}
       - PORTS_MYSQL=${PORTS_MYSQL:-5002}
 
       # Meta/WhatsApp Configuration
@@ -43,7 +43,7 @@ services:
       - PORT=${PORT:-4800}
 
       # API Configuration
-      - URL_API=${URL_API:-http://10.250.0.68:5003}
+      - URL_API=${URL_API:-http://10.250.0.68:5019}
       - USER_API=${USER_API:-ADMIN}
       - PASS_API=${PASS_API:-ADMIN}
       - DEVICE_INFO=${DEVICE_INFO:-{"model":"0","platform":"0","uuid":"4953457348957348975","version":"0","manufacturer":"0"}}
@@ -59,7 +59,7 @@ services:
 
       # Provider Configuration
       - USE_CUSTOM_PROVIDER=${USE_CUSTOM_PROVIDER:-true}
-      - CUSTOM_DISPATCHER_URL=${CUSTOM_DISPATCHER_URL:-http://localhost:8082}
+      - CUSTOM_DISPATCHER_URL=${CUSTOM_DISPATCHER_URL:-http://10.250.0.68:8082}
       - CUSTOM_DISPATCHER_API_KEY=${CUSTOM_DISPATCHER_API_KEY:-LO_QUE_QUIERAS}
 
       # Logging Configuration
